@@ -1,6 +1,6 @@
 import React from "react"
 import "../App.css"
-import Card from "../ui/Card"
+import Card from "./ui/Card"
 
 type FormCardType = {
   rawDeliveries: string
@@ -22,11 +22,11 @@ const FormCard = ({
   deliveriesError,
 }: FormCardType) => {
   return (
-    <Card title="1. Enter your data" className="relative w-[40%]">
+    <Card title="1. Enter your data" className="relative w-full md:w-[40%]">
       <div className="relative h-full w-full flex flex-col items-center">
-        <div className="w-full mb-4">
+        <div className="w-full mb-10">
           <div className="w-full flex flex-col p-4 pb-2">
-            <label>List of deliveries</label>
+            <span>List of deliveries</span>
             <textarea
               className="bg-[#f6f6f6]"
               rows={4}
@@ -42,7 +42,7 @@ const FormCard = ({
             )}
           </div>
           <div className="w-full flex flex-col p-4">
-            <label>Your route</label>
+            <span>Your route</span>
             <textarea
               className="bg-[#f6f6f6]"
               rows={4}
@@ -59,7 +59,7 @@ const FormCard = ({
 
         <button
           type="button"
-          className={`w-full flex items-center justify-center absolute bottom-0 ${
+          className={`w-full mt-2 flex items-center justify-center absolute bottom-0 ${
             (!rawDeliveries || !rawPath) && "disabled"
           }`}
           id="delivery-check-form"

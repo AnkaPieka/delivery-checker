@@ -1,4 +1,4 @@
-import { isDeliveriesType, isPathType } from "../test/typeGuards"
+import { isDeliveriesType, isPathType } from "./typeGuards"
 import {
   actionType,
   deliveriesType,

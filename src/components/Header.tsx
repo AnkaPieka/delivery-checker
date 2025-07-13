@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 
 const Header = () => {
   return (
@@ -11,8 +11,9 @@ const Header = () => {
         />
         <h1 className="text-white">Dashdoc</h1>
       </div>
-      <div className="w-fit rounded-md shadow-sm bg-[#3a64f3] p-2">
+      <div>
         <h2 className="font-bold text-white text-xl">Delivery checker</h2>
+        <div className="w-full mt-2 h-1 rounded-full shadow-sm bg-[#3a64f3]"></div>
       </div>
     </div>
   )

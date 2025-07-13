@@ -4,7 +4,7 @@ import FormCard from "./components/FormCard"
 import ResultCard from "./components/ResultCard"
 import { checkDelivery } from "./logic/deliveryChecker"
 import { deliveriesType, pathType } from "./types"
-import Header from "./ui/Header"
+import Header from "./components/Header"
 
 function App() {
   const [rawDeliveries, setRawDeliveries] = useState("")

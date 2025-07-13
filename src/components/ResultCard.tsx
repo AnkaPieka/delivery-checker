@@ -1,7 +1,7 @@
 import { Replay, WarningRounded } from "@mui/icons-material"
 import React from "react"
 import "../App.css"
-import Card from "../ui/Card"
+import Card from "./ui/Card"
 import Timeline from "./Timeline"
 
 type ResultCardType = {
@@ -20,7 +20,7 @@ const ResultCard = ({
   return (
     <Card
       title={"2. Delivery plan"}
-      className="w-[60%]"
+      className="w-full md:w-[60%]"
       hasButton
       setRawDeliveries={setRawDeliveries}
       setRawPath={setRawPath}
@@ -65,14 +65,14 @@ const ResultCard = ({
                 </table>
               </div>
             ) : (
-              <div className="mt-2 p-4 text-red-900">
+              <div className="min-h-40 mt-2 p-4 text-red-900">
                 {result.error_message}
               </div>
             )}
           </div>
         </div>
       ) : (
-        <div className="h-full text-gray-500 flex items-center justify-center">
+        <div className="h-full text-gray-500 flex items-center justify-center mb-20">
           Compute your data to check your delivery. The result will be displayed
           here.
         </div>

@@ -1,6 +1,6 @@
 import { Replay } from "@mui/icons-material"
 import React from "react"
-import "../App.css"
+import "../../App.css"
 
 type CardProps = {
   title: string

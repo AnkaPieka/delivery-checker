@@ -1,4 +1,4 @@
-import { checkDelivery } from "../logic/deliveryChecker"
+import { checkDelivery } from "./deliveryChecker"
 
 const deliveries = [
   [1, 3],
