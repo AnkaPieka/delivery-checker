@@ -27,8 +27,8 @@ const ResultCard = ({
       setResult={setResult}
     >
       {result ? (
-        <div className="relative h-full flex flex-col items-center ">
-          <div className="w-full ">
+        <div className="relative h-full flex flex-col items-center">
+          <div className="w-full">
             {result.status === "success" ? (
               <div className="w-full border-solid border-1 border-green-900 rounded-sm p-2 bg-green-100 text-green-900 mt-4">
                 You're good to go!
@@ -54,10 +54,7 @@ const ResultCard = ({
                   </thead>
                   <tbody>
                     {result.steps.map((res, index) => (
-                      <tr
-                        key={`${res.address}-${index}`}
-                        className="hover:bg-gray-50"
-                      >
+                      <tr key={index} className="hover:bg-gray-50">
                         <td className="px-4 py-2 border-b">{res.address}</td>
                         <td className="px-4 py-2 border-b">
                           {res.action ?? "-"}

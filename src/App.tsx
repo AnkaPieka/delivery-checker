@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useCallback } from "react"
 import "./App.css"
 import FormCard from "./components/FormCard"
 import ResultCard from "./components/ResultCard"
@@ -10,11 +10,10 @@ function App() {
   const [rawDeliveries, setRawDeliveries] = useState("")
   const [rawPath, setRawPath] = useState("")
   const [result, setResult] = useState<[] | undefined>(undefined)
-
   const [deliveriesError, setDeliveriesError] = useState("")
   const [pathError, setPathError] = useState("")
 
-  const validateDeliveries = (input: string) => {
+  const validateDeliveries = useCallback((input: string) => {
     try {
       const trimmed = input.trim()
       if (!trimmed)
@@ -25,6 +24,9 @@ function App() {
       if (!Array.isArray(parsed)) {
         return { isValid: false, error: "Deliveries must be an array" }
       }
+
+      const allNumbers: number[] = []
+      const numberSet = new Set<number>()
 
       for (let i = 0; i < parsed.length; i++) {
         const delivery = parsed[i]
@@ -50,6 +52,27 @@ function App() {
             error: `Delivery ${i + 1} must contain only integers`,
           }
         }
+
+        // Check for duplicates within the same delivery
+        if (delivery[0] === delivery[1]) {
+          return {
+            isValid: false,
+            error: `Delivery ${i + 1} cannot have identical numbers [${
+              delivery[0]
+            }, ${delivery[1]}]`,
+          }
+        }
+
+        // Check for duplicates across all deliveries in one pass
+        for (const num of delivery) {
+          if (numberSet.has(num)) {
+            return {
+              isValid: false,
+              error: `Duplicate number ${num} found across deliveries`,
+            }
+          }
+          numberSet.add(num)
+        }
       }
 
       return { isValid: true, data: parsed }
@@ -59,9 +82,9 @@ function App() {
         error: "Invalid JSON format. Expected format: [[1, 3], [2, 5]]",
       }
     }
-  }
+  }, [])
 
-  const validatePath = (input: string) => {
+  const validatePath = useCallback((input: string) => {
     try {
       const trimmed = input.trim()
       if (!trimmed) return { isValid: false, error: "Path cannot be empty" }
@@ -78,6 +101,18 @@ function App() {
         return { isValid: false, error: "Path must contain only integers" }
       }
 
+      const numberSet = new Set<number>()
+      for (let i = 0; i < parsed.length; i++) {
+        const num = parsed[i]
+        if (numberSet.has(num)) {
+          return {
+            isValid: false,
+            error: `Duplicate number ${num} found in path at position ${i + 1}`,
+          }
+        }
+        numberSet.add(num)
+      }
+
       return { isValid: true, data: parsed }
     } catch (error) {
       return {
@@ -85,9 +120,9 @@ function App() {
         error: "Invalid JSON format. Expected format: [1, 2, 3, 4, 5]",
       }
     }
-  }
+  }, [])
 
-  const onCheckButtonClick = () => {
+  const onCheckButtonClick = useCallback(() => {
     const deliveriesValidation = validateDeliveries(rawDeliveries)
     if (!deliveriesValidation.isValid) {
       setDeliveriesError(deliveriesValidation.error)
@@ -103,12 +138,12 @@ function App() {
     setDeliveriesError("")
     setPathError("")
 
-    const deliveries = JSON.parse(rawDeliveries) as deliveriesType
-    const path = JSON.parse(rawPath) as pathType
+    const deliveries = deliveriesValidation.data as deliveriesType
+    const path = pathValidation.data as pathType
 
     const checkedResult = checkDelivery(deliveries, path)
     setResult(checkedResult)
-  }
+  }, [rawDeliveries, rawPath, validateDeliveries, validatePath])
 
   return (
     <div className="w-full h-full">

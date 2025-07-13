@@ -9,28 +9,31 @@ const Timeline = ({ result }: TimelineType) => {
   const config = {
     pickup: {
       label: "Pickup",
-      color: "bg-green-500",
-      icon: <LocalShipping className="text-white w-4 h-4" />,
+      bg_color: "bg-green-100",
+      border_color: "border-green-600",
+      icon: <LocalShipping className="text-green-600 w-4 h-4" />,
     },
     dropoff: {
       label: "Dropoff",
-      color: "bg-blue-500",
-      icon: <Inventory2 className="text-white w-4 h-4" />,
+      bg_color: "bg-blue-100",
+      border_color: "border-blue-600",
+      icon: <Inventory2 className="text-blue-600 w-4 h-4" />,
     },
     null: {
       label: "No action",
-      color: "bg-gray-400",
-      icon: <LocationOn className="text-white w-4 h-4" />,
+      bg_color: "bg-gray-100",
+      border_color: "border-gray-600",
+      icon: <LocationOn className="text-gray-600 w-4 h-4 bg-gray" />,
     },
   }
 
   if (result.status === "error") return <div></div>
 
   return (
-    <div className="flex items-center justify-between gap-4 flex-wrap w-full py-4 px-2">
+    <div className="flex items-center justify-center gap-4 flex-wrap w-full py-4 px-2">
       {result.steps.map((step, index) => {
         const action = step.action ?? "null"
-        const { label, color, icon } = config[action]
+        const { label, bg_color, border_color, icon } = config[action]
 
         return (
           <div
@@ -40,16 +43,12 @@ const Timeline = ({ result }: TimelineType) => {
             <div className="text-xs text-gray-700 mt-1">#{step.address}</div>
 
             <div
-              className={`w-10 h-10 rounded-full flex items-center justify-center ${color}`}
+              className={`w-10 h-10 rounded-full flex items-center justify-center ${bg_color} border-solid border-2 ${border_color}`}
             >
               {icon}
             </div>
 
             <div className="text-xs text-gray-700 mt-1">{label}</div>
-
-            {index !== result.steps.length - 1 && (
-              <div className="absolute h-1 w-10 bg-gray-300 top-[30px] left-[60px] -z-10" />
-            )}
           </div>
         )
       })}

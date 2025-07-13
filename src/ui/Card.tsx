@@ -23,7 +23,7 @@ const Card = ({
 }: CardProps) => {
   return (
     <div
-      className={`relative h-full w-full p-4 flex flex-col gap-2 rounded-md border border-gray-200 shadow-sm bg-white text-black h-full ${className}`}
+      className={`relative h-full p-4 flex flex-col gap-2 rounded-md border border-gray-200 shadow-sm bg-white text-black h-full ${className}`}
     >
       <h2 className="text-lg font-semibold text-black flex-shrink-0">
         {title}
