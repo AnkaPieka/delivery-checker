@@ -63,7 +63,7 @@ Open [http://localhost:5173] to view the interface in your browser.
 You can test the algorithm directly using `ts-node`:
 
 ```bash
-npx ts-node src/logic/test.ts
+npx ts-node src/logic/run.ts
 ```
 
 Or create your own test file in `src/logic/` and import `checkDelivery`.
@@ -78,6 +78,7 @@ Or create your own test file in `src/logic/` and import `checkDelivery`.
     /ui            # Reusable base element Card
   /logic         # Algorithm, types and tests
 ```
+📘 See [LLM_USAGE.md] for details on how AI tools were used during development.
 
 ---
 
