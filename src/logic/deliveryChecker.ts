@@ -7,7 +7,7 @@ import {
 } from "../types"
 
 // Version optimisée avec LLM Claude
-const createAndLogError = (errorCode: string, errorMessage: string) => {
+export const createAndLogError = (errorCode: string, errorMessage: string) => {
   const error = {
     status: "error" as const,
     error_code: errorCode,

@@ -1,9 +1,9 @@
-import { Inventory2, LocalShipping, LocationOn } from "@mui/icons-material"
-import React from "react"
+import { Inventory2, LocalShipping, LocationOn } from "@mui/icons-material";
+import React from "react";
 
 type TimelineType = {
-  result: any
-}
+  result: any;
+};
 
 const Timeline = ({ result }: TimelineType) => {
   const config = {
@@ -25,15 +25,15 @@ const Timeline = ({ result }: TimelineType) => {
       border_color: "border-gray-600",
       icon: <LocationOn className="text-gray-600 w-4 h-4 bg-gray" />,
     },
-  }
+  };
 
-  if (result.status === "error") return <div></div>
+  if (result.status === "error") return <div></div>;
 
   return (
     <div className="flex items-center justify-center gap-4 flex-wrap w-full py-4 px-2">
       {result.steps.map((step, index) => {
-        const action = step.action ?? "null"
-        const { label, bg_color, border_color, icon } = config[action]
+        const action = step.action ?? "null";
+        const { label, bg_color, border_color, icon } = config[action];
 
         return (
           <div
@@ -50,10 +50,10 @@ const Timeline = ({ result }: TimelineType) => {
 
             <div className="text-xs text-gray-700 mt-1">{label}</div>
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default Timeline
+export default Timeline;

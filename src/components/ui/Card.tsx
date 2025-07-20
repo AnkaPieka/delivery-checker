@@ -1,52 +1,47 @@
-import { Replay } from "@mui/icons-material"
-import React from "react"
-import "../../App.css"
+import { Replay } from "@mui/icons-material";
+import React from "react";
+import "../../App.css";
+import CardButton from "./CardButton";
 
-type CardProps = {
-  title: string
-  children?: React.ReactNode
-  hasButton?: boolean
-  setRawDeliveries?: React.Dispatch<React.SetStateAction<string>>
-  setRawPath?: React.Dispatch<React.SetStateAction<string>>
-  setResult?: React.Dispatch<React.SetStateAction<[] | undefined>>
-  className?: string
+interface CardProps {
+  parent: "form" | "result";
+  title: string;
+  children?: React.ReactNode;
+  hasButton?: boolean;
+  onButtonClick?: () => void;
+  className?: string;
 }
 
 const Card = ({
+  parent,
   title,
   children,
   hasButton,
-  setRawDeliveries,
-  setRawPath,
-  setResult,
+  onButtonClick: onClick,
   className,
 }: CardProps) => {
   return (
     <div
-      className={`relative h-full p-4 flex flex-col gap-2 rounded-md border border-gray-200 shadow-sm bg-white text-black h-full ${className}`}
+      className={`relative h-full p-4 flex flex-col gap-2 rounded-md border border-gray-200 shadow-sm bg-white text-black ${className}`}
     >
       <h2 className="text-lg font-semibold text-black flex-shrink-0">
         {title}
       </h2>
-      <div className="flex-1 overflow-y-auto min-h-0">{children}</div>
-
-      {hasButton && setRawDeliveries && setRawPath && setResult && (
-        <button
-          type="button"
-          className="ghost flex items-center justify-center gap-2 absolute bottom-4 left-4 w-[calc(100%-2rem)]"
-          form="reset-and-check-button"
-          onClick={() => {
-            setRawDeliveries("")
-            setRawPath("")
-            setResult(undefined)
-          }}
-        >
-          Reset and check another delivery
-          <Replay />
-        </button>
+      <div className="overflow-y-scroll h-[80%]">
+        <div className="flex-1 overflow-y-auto min-h-0">{children}</div>
+      </div>
+      {hasButton && parent === "result" ? (
+        <CardButton
+          text="Reset and check another delivery"
+          variant={"ghost"}
+          onClick={onClick}
+          iconRight={<Replay />}
+        />
+      ) : (
+        <CardButton text="Compute" onClick={onClick} />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;
