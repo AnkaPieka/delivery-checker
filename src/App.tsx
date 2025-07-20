@@ -3,7 +3,7 @@ import "./App.css";
 import FormCard from "./components/Form/FormCard";
 import ResultCard from "./components/Result/ResultCard";
 import { checkDelivery } from "./logic/deliveryChecker";
-import { deliveriesType, pathType } from "./types";
+import { deliveriesType, pathType } from "./logic/types";
 import Header from "./components/Header";
 
 function App() {

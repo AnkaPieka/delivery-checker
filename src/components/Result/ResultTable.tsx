@@ -1,10 +1,11 @@
 import React from "react";
+import { successType } from "../../logic/types";
 
-interface ResultTable {
-  result: any;
+interface ResultTableProps {
+  result: successType;
 }
 
-const ResultTable = ({ result }: ResultTable) => {
+const ResultTable = ({ result }: ResultTableProps) => {
   return (
     <div className="w-full mb-20 mt-4">
       <table className="w-full text-sm border border-gray-200 rounded-md">

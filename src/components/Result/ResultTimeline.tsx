@@ -1,8 +1,9 @@
 import { Inventory2, LocalShipping, LocationOn } from "@mui/icons-material";
 import React from "react";
+import { successType } from "../../logic/types";
 
 type TimelineType = {
-  result: any;
+  result: successType;
 };
 
 const Timeline = ({ result }: TimelineType) => {
@@ -27,11 +28,9 @@ const Timeline = ({ result }: TimelineType) => {
     },
   };
 
-  if (result.status === "error") return <div></div>;
-
   return (
     <div className="flex items-center justify-center gap-4 flex-wrap w-full py-4 px-2">
-      {result.steps.map((step, index) => {
+      {result.steps.map((step: any, index: number) => {
         const action = step.action ?? "null";
         const { label, bg_color, border_color, icon } = config[action];
 

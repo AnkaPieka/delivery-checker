@@ -7,7 +7,6 @@ interface CardProps {
   parent: "form" | "result";
   title: string;
   children?: React.ReactNode;
-  hasButton?: boolean;
   onButtonClick?: () => void;
   className?: string;
 }
@@ -16,7 +15,6 @@ const Card = ({
   parent,
   title,
   children,
-  hasButton,
   onButtonClick: onClick,
   className,
 }: CardProps) => {
@@ -27,10 +25,8 @@ const Card = ({
       <h2 className="text-lg font-semibold text-black flex-shrink-0">
         {title}
       </h2>
-      <div className="overflow-y-scroll h-[80%]">
-        <div className="flex-1 overflow-y-auto min-h-0">{children}</div>
-      </div>
-      {hasButton && parent === "result" ? (
+      <div className={`overflow-y-scroll h-[80%] mb-12`}>{children}</div>
+      {parent === "result" ? (
         <CardButton
           text="Reset and check another delivery"
           variant={"ghost"}
